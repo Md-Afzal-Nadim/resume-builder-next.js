@@ -47,12 +47,10 @@ userSchema.methods.comparePassword = function (candidatepassword: string): boole
 }
 
 
-
 const UserModel =
   mongoose.models.User || mongoose.model("User", userSchema);
 
 export default UserModel
-
-/*const UserModel = mongoose.model("User", userSchema);
+/*const UserModel = mongoose.model<UserDocument>("User", userSchema);
 export default UserModel*/
 
