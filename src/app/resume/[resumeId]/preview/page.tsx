@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Eye, Download, Sparkles } from "lucide-react";
 import { useParams } from "next/navigation";
+import AtsScore from "@/components/AtsScore";
+import DownloadPdf from "@/components/DownloadPdf";
+import EditPdf from "@/components/EditPdf";
 
 interface Resume {
   title: string;
@@ -51,7 +53,10 @@ export default function ResumePreviewPage() {
 
   const [loading, setLoading] = useState(true);
 
-  const { resumeId } = useParams();
+  const params = useParams();
+  const resumeId = Array.isArray(params.resumeId)
+    ? params.resumeId[0]
+    : params.resumeId;
 
   useEffect(() => {
     fetchResume();
@@ -92,20 +97,10 @@ export default function ResumePreviewPage() {
               <h2 className="font-bold text-xl mb-6">Resume Actions</h2>
 
               <div className="space-y-3">
-                <button className="w-full flex items-center gap-3 bg-violet-600 text-white px-4 py-3 rounded-xl">
-                  <Sparkles size={18} />
-                  ATS Score
-                </button>
+                <AtsScore resume={resume} />
 
-                <button className="w-full flex items-center gap-3 border px-4 py-3 rounded-xl">
-                  <Download size={18} />
-                  Download PDF
-                </button>
-
-                <button className="w-full flex items-center gap-3 border px-4 py-3 rounded-xl">
-                  <Eye size={18} />
-                  Edit Resume
-                </button>
+                <DownloadPdf />
+                <EditPdf resumeId={resumeId} />
               </div>
             </div>
           </div>
