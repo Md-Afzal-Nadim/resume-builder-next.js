@@ -1,11 +1,5 @@
-import React from 'react'
+import { redirect } from "next/navigation";
 
-type Props = {}
-
- function page({}: Props) {
-  return (
-    <div>This is home page</div>
-  )
+export default function RegisterFormData() {
+  redirect("/auth/register");
 }
-
-export default page
