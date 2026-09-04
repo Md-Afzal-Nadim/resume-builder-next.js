@@ -3,7 +3,16 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { User, Mail, Phone, MapPin, Globe, ArrowRight } from "lucide-react";
+import {
+  User,
+  Mail,
+  Phone,
+  MapPin,
+  Globe,
+  Link,
+  GitBranch,
+  ArrowRight,
+} from "lucide-react";
 
 interface Props {
   resumeId: string | null;
@@ -11,11 +20,11 @@ interface Props {
 }
 
 interface PersonalInfoForm {
-  fullName: string;
+  fullname: string;
   email: string;
-  phone: string;
+  mobile: string;
   location: string;
-  linkedin: string;
+  linkedIn: string;
   github: string;
   portfolio: string;
 }
@@ -35,8 +44,7 @@ export default function PersonalInfoStep({ resumeId, onNext }: Props) {
   const fetchResume = async () => {
     try {
       const { data } = await axios.get(`/api/resume/${resumeId}`);
-
-      reset(data.resume.personalInfo || {});
+      reset(data.data?.personalDetails || {});
     } catch (error) {
       console.log(error);
     }
@@ -45,9 +53,8 @@ export default function PersonalInfoStep({ resumeId, onNext }: Props) {
   const onSubmit = async (values: PersonalInfoForm) => {
     try {
       await axios.patch(`/api/resume/${resumeId}`, {
-        personalInfo: values,
+        personalDetails: values,
       });
-
       onNext();
     } catch (error) {
       console.log(error);
@@ -55,98 +62,89 @@ export default function PersonalInfoStep({ resumeId, onNext }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-10 px-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-[#FAF8F3] px-4 py-10">
+      <div className="mx-auto max-w-2xl">
         {/* Progress */}
         <div className="mb-8">
-          <div className="flex justify-between mb-2">
-            <span className="font-medium">Step 1 of 8</span>
-
-            <span className="text-slate-500">12%</span>
+          <div className="mb-2 flex items-baseline justify-between">
+            <span className="font-serif text-sm text-[#1C1F26]">Step 1 of 8</span>
+            <span className="text-xs text-[#B8B2A2]">12% complete</span>
           </div>
-
-          <div className="h-2 bg-slate-200 rounded-full">
-            <div className="h-full w-[12%] bg-violet-600 rounded-full" />
+          <div className="h-[3px] bg-[#E4DFD4]">
+            <div className="h-full w-[12%] bg-[#8B3A3A]" />
           </div>
         </div>
 
         {/* Card */}
-        <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-slate-800">
-              Personal Information
+        <div className="border border-[#E4DFD4] bg-white p-10">
+          <div className="mb-8 border-b border-[#E4DFD4] pb-6">
+            <h1 className="font-serif text-2xl text-[#1C1F26]">
+              Personal information
             </h1>
-
-            <p className="text-slate-500 mt-2">
+            <p className="mt-1.5 text-sm text-[#6B7280]">
               Tell recruiters how they can reach you.
             </p>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            {/* Full Name */}
             <InputField
-              icon={<User size={18} />}
+              icon={<User size={17} />}
               placeholder="John Doe"
-              label="Full Name"
-              register={register("fullName")}
+              label="Full name"
+              register={register("fullname")}
             />
 
-            {/* Email */}
             <InputField
-              icon={<Mail size={18} />}
+              icon={<Mail size={17} />}
               placeholder="john@example.com"
               label="Email"
               register={register("email")}
             />
 
-            {/* Phone */}
             <InputField
-              icon={<Phone size={18} />}
+              icon={<Phone size={17} />}
               placeholder="+91 9876543210"
-              label="Phone Number"
-              register={register("phone")}
+              label="Phone number"
+              register={register("mobile")}
             />
 
-            {/* Location */}
             <InputField
-              icon={<MapPin size={18} />}
+              icon={<MapPin size={17} />}
               placeholder="Bhopal, India"
               label="Location"
               register={register("location")}
             />
 
-            {/* LinkedIn */}
             <InputField
-              //   icon={<Linkedin size={18} />}
+              icon={<Link size={17} />}
               placeholder="https://linkedin.com/in/..."
               label="LinkedIn"
-              register={register("linkedin")}
+              register={register("linkedIn")}
             />
 
-            {/* Github */}
             <InputField
-              //   icon={<Github size={18} />}
+              icon={<GitBranch size={17} />}
               placeholder="https://github.com/..."
               label="GitHub"
               register={register("github")}
             />
 
-            {/* Portfolio */}
             <InputField
-              icon={<Globe size={18} />}
+              icon={<Globe size={17} />}
               placeholder="https://portfolio.com"
               label="Portfolio"
               register={register("portfolio")}
             />
 
-            <div className="flex justify-end pt-4">
+            <div className="flex justify-end border-t border-[#E4DFD4] pt-6">
               <button
                 disabled={isSubmitting}
-                className="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white px-6 py-3 rounded-xl font-semibold transition"
+                className="inline-flex items-center gap-2 bg-[#1C1F26] px-6 py-2.5
+                           text-sm font-medium text-[#FAF8F3] transition
+                           hover:bg-[#8B3A3A] disabled:opacity-60"
               >
                 {isSubmitting ? "Saving..." : "Continue"}
-
-                <ArrowRight size={18} />
+                <ArrowRight size={16} />
               </button>
             </div>
           </form>
@@ -159,19 +157,21 @@ export default function PersonalInfoStep({ resumeId, onNext }: Props) {
 function InputField({ label, placeholder, icon, register }: any) {
   return (
     <div>
-      <label className="block text-sm font-medium text-slate-700 mb-2">
+      <label className="mb-2 block text-sm font-medium text-[#1C1F26]">
         {label}
       </label>
 
       <div className="relative">
-        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[#B8B2A2]">
           {icon}
         </div>
 
         <input
           {...register}
           placeholder={placeholder}
-          className="w-full border border-slate-300 rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-violet-500"
+          className="w-full border border-[#E4DFD4] bg-white py-3 pl-12 pr-4
+                     text-sm text-[#1C1F26] placeholder:text-[#B8B2A2]
+                     focus:border-[#8B3A3A] focus:outline-none focus:ring-1 focus:ring-[#8B3A3A]"
         />
       </div>
     </div>

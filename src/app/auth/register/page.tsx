@@ -43,45 +43,33 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex relative overflow-hidden">
-      {/* Ambient background */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-blue-600/25 blur-[120px]" />
-        <div className="absolute top-1/3 -left-32 h-96 w-96 rounded-full bg-violet-600/25 blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 h-72 w-72 rounded-full bg-indigo-500/20 blur-[100px]" />
-      </div>
-
+    <div className="flex min-h-screen bg-[#FAF8F3]">
       {/* Left - brand panel */}
-      <div className="hidden lg:flex flex-1 relative flex-col justify-between p-14 text-white z-10">
-        <div className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm ring-1 ring-white/20">
-            <Sparkles size={18} className="text-violet-300" />
-          </div>
-          <span className="font-semibold tracking-tight text-lg">
-            AI Resume Builder
-          </span>
-        </div>
+      <div className="relative hidden flex-1 flex-col justify-between border-r border-[#E4DFD4] bg-[#1C1F26] p-14 text-[#FAF8F3] lg:flex">
+        <Link href="/" className="font-serif text-xl">
+          Resume<span className="text-[#C97B7B]">Builder</span>
+        </Link>
 
         <div className="max-w-md">
-          <h2 className="text-4xl font-bold tracking-tight leading-tight">
+          <h2 className="font-serif text-4xl leading-tight">
             Build your professional resume.
           </h2>
-          <p className="mt-4 text-slate-300 leading-relaxed">
-            Generate summaries, skills, experience and ATS reports
-            instantly — powered by AI.
+          <p className="mt-4 leading-relaxed text-[#B8B2A2]">
+            Generate summaries, skills, and experience — and check your ATS
+            score — instantly.
           </p>
 
-          <ul className="mt-10 space-y-3 text-sm text-slate-300">
+          <ul className="mt-10 space-y-3 border-t border-white/10 pt-8 text-sm text-[#D8D2C4]">
             <li className="flex items-center gap-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
+              <span className="h-1 w-1 bg-[#C97B7B]" />
               AI-generated summaries and bullet points
             </li>
             <li className="flex items-center gap-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
+              <span className="h-1 w-1 bg-[#C97B7B]" />
               Instant ATS compatibility score
             </li>
             <li className="flex items-center gap-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
+              <span className="h-1 w-1 bg-[#C97B7B]" />
               Ready in minutes, not hours
             </li>
           </ul>
@@ -89,50 +77,53 @@ export default function RegisterPage() {
       </div>
 
       {/* Right - form */}
-      <div className="flex-1 flex items-center justify-center p-6 z-10">
-        <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/[0.06] backdrop-blur-xl shadow-2xl p-8 sm:p-10">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+      <div className="flex flex-1 items-center justify-center p-6">
+        <div className="w-full max-w-md border border-[#E4DFD4] bg-white p-8 sm:p-10">
+          <div className="mb-2 flex items-center gap-2 lg:hidden">
+            <Sparkles size={16} className="text-[#8B3A3A]" />
+            <span className="font-serif text-lg text-[#1C1F26]">ResumeBuilder</span>
+          </div>
+
+          <h2 className="font-serif text-2xl text-[#1C1F26] sm:text-3xl">
             Create account
           </h2>
-          <p className="text-slate-400 mt-2 text-sm">
+          <p className="mt-2 text-sm text-[#6B7280]">
             Start building your resume in minutes.
           </p>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-5">
             {/* Name */}
             <div>
-              <label className="block mb-1.5 text-sm font-medium text-slate-300">
+              <label className="mb-1.5 block text-sm font-medium text-[#1C1F26]">
                 Full name
               </label>
               <div className="relative">
                 <User
-                  size={17}
-                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"
+                  size={16}
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#B8B2A2]"
                 />
                 <input
-                  {...register("name", {
-                    required: "Name is required",
-                  })}
+                  {...register("name", { required: "Name is required" })}
                   placeholder="John Doe"
-                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-500 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none transition"
+                  className="w-full border border-[#E4DFD4] bg-white py-3 pl-10 pr-4 text-sm
+                             text-[#1C1F26] placeholder:text-[#B8B2A2]
+                             focus:border-[#8B3A3A] focus:outline-none focus:ring-1 focus:ring-[#8B3A3A]"
                 />
               </div>
               {errors.name && (
-                <p className="text-red-400 text-xs mt-1.5">
-                  {errors.name.message}
-                </p>
+                <p className="mt-1.5 text-xs text-[#8B3A3A]">{errors.name.message}</p>
               )}
             </div>
 
             {/* Email */}
             <div>
-              <label className="block mb-1.5 text-sm font-medium text-slate-300">
+              <label className="mb-1.5 block text-sm font-medium text-[#1C1F26]">
                 Email
               </label>
               <div className="relative">
                 <Mail
-                  size={17}
-                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"
+                  size={16}
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#B8B2A2]"
                 />
                 <input
                   {...register("email", {
@@ -143,24 +134,24 @@ export default function RegisterPage() {
                     },
                   })}
                   placeholder="john@example.com"
-                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-500 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none transition"
+                  className="w-full border border-[#E4DFD4] bg-white py-3 pl-10 pr-4 text-sm
+                             text-[#1C1F26] placeholder:text-[#B8B2A2]
+                             focus:border-[#8B3A3A] focus:outline-none focus:ring-1 focus:ring-[#8B3A3A]"
                 />
               </div>
               {errors.email && (
-                <p className="text-red-400 text-xs mt-1.5">
-                  {errors.email.message}
-                </p>
+                <p className="mt-1.5 text-xs text-[#8B3A3A]">{errors.email.message}</p>
               )}
             </div>
 
             {/* Mobile */}
             <div>
-              <label className="block mb-1.5 text-sm font-medium text-slate-300">
+              <label className="mb-1.5 block text-sm font-medium text-[#1C1F26]">
                 Mobile number
               </label>
-              <div className="relative flex items-stretch">
-                <span className="flex items-center gap-1.5 rounded-l-xl border border-r-0 border-white/10 bg-white/5 px-3 text-sm text-slate-400">
-                  <Phone size={15} />
+              <div className="flex items-stretch">
+                <span className="flex items-center gap-1.5 border border-r-0 border-[#E4DFD4] bg-[#FAF8F3] px-3 text-sm text-[#6B7280]">
+                  <Phone size={14} />
                   +91
                 </span>
                 <input
@@ -175,25 +166,25 @@ export default function RegisterPage() {
                     },
                   })}
                   placeholder="98765 43210"
-                  className="w-full pl-3 pr-4 py-3 rounded-r-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-500 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none transition"
+                  className="w-full border border-[#E4DFD4] bg-white py-3 pl-3 pr-4 text-sm
+                             text-[#1C1F26] placeholder:text-[#B8B2A2]
+                             focus:border-[#8B3A3A] focus:outline-none focus:ring-1 focus:ring-[#8B3A3A]"
                 />
               </div>
               {errors.mobile && (
-                <p className="text-red-400 text-xs mt-1.5">
-                  {errors.mobile.message}
-                </p>
+                <p className="mt-1.5 text-xs text-[#8B3A3A]">{errors.mobile.message}</p>
               )}
             </div>
 
             {/* Password */}
             <div>
-              <label className="block mb-1.5 text-sm font-medium text-slate-300">
+              <label className="mb-1.5 block text-sm font-medium text-[#1C1F26]">
                 Password
               </label>
               <div className="relative">
                 <Lock
-                  size={17}
-                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"
+                  size={16}
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#B8B2A2]"
                 />
                 <input
                   type={showPassword ? "text" : "password"}
@@ -204,41 +195,43 @@ export default function RegisterPage() {
                       message: "Minimum 6 characters required",
                     },
                   })}
-                  placeholder="********"
-                  className="w-full pl-10 pr-11 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-500 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none transition"
+                  placeholder="········"
+                  className="w-full border border-[#E4DFD4] bg-white py-3 pl-10 pr-11 text-sm
+                             text-[#1C1F26] placeholder:text-[#B8B2A2]
+                             focus:border-[#8B3A3A] focus:outline-none focus:ring-1 focus:ring-[#8B3A3A]"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((s) => !s)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#B8B2A2] transition hover:text-[#1C1F26]"
                   tabIndex={-1}
                 >
-                  {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
               {errors.password && (
-                <p className="text-red-400 text-xs mt-1.5">
-                  {errors.password.message}
-                </p>
+                <p className="mt-1.5 text-xs text-[#8B3A3A]">{errors.password.message}</p>
               )}
             </div>
 
             <button
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 disabled:opacity-60 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition shadow-lg shadow-violet-900/30 mt-2"
+              className="mt-2 flex w-full items-center justify-center gap-2 bg-[#1C1F26]
+                         py-3 text-sm font-medium text-[#FAF8F3] transition
+                         hover:bg-[#8B3A3A] disabled:opacity-60"
             >
               {isSubmitting ? "Creating account..." : "Create account"}
-              <ArrowRight size={18} />
+              <ArrowRight size={16} />
             </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-slate-400">
+          <p className="mt-6 text-center text-sm text-[#6B7280]">
             Already have an account?
             <Link
               href="/auth/login"
-              className="ml-1.5 text-violet-400 font-semibold hover:text-violet-300"
+              className="ml-1.5 font-medium text-[#8B3A3A] hover:underline"
             >
-              Login
+              Log in
             </Link>
           </p>
         </div>

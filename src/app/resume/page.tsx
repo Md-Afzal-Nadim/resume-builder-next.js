@@ -91,52 +91,39 @@ export default function ResumePage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 relative overflow-hidden">
-      {/* Ambient background */}
-      <div className="pointer-events-none fixed inset-0">
-        <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-violet-600/20 blur-[120px]" />
-        <div className="absolute top-1/3 -right-32 h-96 w-96 rounded-full bg-blue-600/15 blur-[120px]" />
-        <div className="absolute bottom-0 left-1/4 h-72 w-72 rounded-full bg-indigo-500/15 blur-[100px]" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10 relative z-10">
+    <div className="min-h-screen bg-[#FAF8F3]">
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 sm:mb-10">
-          <div className="flex items-center gap-3">
-            <div className="hidden sm:flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 backdrop-blur-sm ring-1 ring-white/20">
-              <Sparkles size={20} className="text-violet-300" />
-            </div>
-            <div>
-              <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-                My Resumes
-              </h1>
-              <p className="text-slate-400 mt-1 text-sm sm:text-base">
-                Create ATS-friendly resumes using AI.
-              </p>
-            </div>
+        <div className="mb-8 flex flex-col gap-4 border-b border-[#E4DFD4] pb-6 sm:mb-10 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h1 className="font-serif text-3xl text-[#1C1F26] sm:text-4xl">
+              My resumes
+            </h1>
+            <p className="mt-1 text-sm text-[#6B7280] sm:text-base">
+              Create ATS-friendly resumes using AI.
+            </p>
           </div>
 
           <button
             onClick={() => setShowModal(true)}
-            className="w-full sm:w-auto bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white px-6 py-3 rounded-xl flex items-center justify-center gap-2 font-semibold shadow-lg shadow-violet-900/30 transition"
+            className="flex w-full items-center justify-center gap-2 bg-[#1C1F26]
+                       px-6 py-3 text-sm font-medium text-[#FAF8F3] transition
+                       hover:bg-[#8B3A3A] sm:w-auto"
           >
-            <Plus size={18} />
-            Create Resume
+            <Plus size={17} />
+            Create resume
           </button>
         </div>
 
         {/* Loading skeleton */}
         {loading && (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          <div className="grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
             {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="rounded-3xl border border-white/10 bg-white/[0.06] backdrop-blur-xl p-6 animate-pulse"
-              >
-                <div className="h-5 w-2/3 bg-white/10 rounded" />
-                <div className="h-4 w-1/2 bg-white/10 rounded mt-4" />
-                <div className="h-6 w-20 bg-white/10 rounded-full mt-4" />
-                <div className="h-11 w-full bg-white/10 rounded-xl mt-6" />
+              <div key={i} className="border border-[#E4DFD4] bg-white p-6">
+                <div className="h-5 w-2/3 animate-pulse bg-[#EFEBE1]" />
+                <div className="mt-4 h-4 w-1/2 animate-pulse bg-[#EFEBE1]" />
+                <div className="mt-4 h-6 w-20 animate-pulse bg-[#EFEBE1]" />
+                <div className="mt-6 h-11 w-full animate-pulse bg-[#EFEBE1]" />
               </div>
             ))}
           </div>
@@ -144,49 +131,46 @@ export default function ResumePage() {
 
         {/* Empty State */}
         {!loading && resumes.length === 0 && (
-          <div className="rounded-3xl border border-white/10 bg-white/[0.06] backdrop-blur-xl p-10 sm:p-16 text-center">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20">
-              <FileText size={32} className="text-violet-300" />
-            </div>
-
-            <h2 className="text-xl sm:text-2xl font-semibold mt-6 text-white">
+          <div className="border border-dashed border-[#D8D2C4] bg-white/60 px-8 py-16 text-center sm:py-20">
+            <FileText size={36} className="mx-auto text-[#B8B2A2]" strokeWidth={1.5} />
+            <h2 className="mt-6 font-serif text-xl text-[#1C1F26] sm:text-2xl">
               No resume yet
             </h2>
-
-            <p className="text-slate-400 mt-2 text-sm sm:text-base">
+            <p className="mx-auto mt-2 max-w-sm text-sm text-[#6B7280] sm:text-base">
               Create your first AI-powered resume in minutes.
             </p>
-
             <button
               onClick={() => setShowModal(true)}
-              className="mt-6 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-violet-900/30 transition inline-flex items-center gap-2"
+              className="mt-6 inline-flex items-center gap-2 bg-[#1C1F26] px-6 py-3
+                         text-sm font-medium text-[#FAF8F3] transition hover:bg-[#8B3A3A]"
             >
-              <Plus size={18} />
-              Create Resume
+              <Plus size={17} />
+              Create resume
             </button>
           </div>
         )}
 
         {/* Resume Grid */}
         {!loading && resumes.length > 0 && (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          <div className="grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
             {resumes.map((resume) => (
               <div
                 key={resume._id}
-                className="group rounded-3xl border border-white/10 bg-white/[0.06] backdrop-blur-xl p-6 hover:bg-white/[0.09] hover:border-violet-400/30 transition"
+                className="group border border-[#E4DFD4] bg-white p-6 transition
+                           hover:border-[#8B3A3A]/40 hover:shadow-[0_8px_24px_-12px_rgba(28,31,38,0.15)]"
               >
-                <div className="flex justify-between items-start gap-3">
+                <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <h2 className="font-bold text-lg sm:text-xl text-white truncate">
+                    <h2 className="truncate font-serif text-lg text-[#1C1F26] sm:text-xl">
                       {resume.title}
                     </h2>
 
-                    <div className="flex items-center gap-2 text-slate-400 mt-2 text-sm">
-                      <Briefcase size={15} className="shrink-0" />
+                    <div className="mt-2 flex items-center gap-2 text-sm text-[#6B7280]">
+                      <Briefcase size={14} className="shrink-0" />
                       <span className="truncate">{resume.jobTitle}</span>
                     </div>
 
-                    <span className="inline-block mt-4 bg-violet-500/15 text-violet-300 ring-1 ring-violet-400/30 px-3 py-1 rounded-full text-xs font-medium">
+                    <span className="mt-4 inline-block border border-[#E4DFD4] px-2.5 py-0.5 text-xs text-[#8B3A3A]">
                       {resume.experienceLevel}
                     </span>
                   </div>
@@ -194,18 +178,19 @@ export default function ResumePage() {
                   <button
                     onClick={() => handleDelete(resume._id)}
                     disabled={deletingId === resume._id}
-                    className="shrink-0 text-slate-500 hover:text-red-400 hover:bg-red-500/10 rounded-lg p-2 transition disabled:opacity-50"
+                    className="shrink-0 p-2 text-[#9CA3AF] transition hover:text-[#8B3A3A] disabled:opacity-50"
                   >
-                    <Trash2 size={17} />
+                    <Trash2 size={16} />
                   </button>
                 </div>
 
                 <button
                   onClick={() => router.push(`/resume/${resume._id}`)}
-                  className="mt-6 w-full bg-white/10 hover:bg-white/15 border border-white/10 text-white py-3 rounded-xl font-medium transition flex items-center justify-center gap-2"
+                  className="mt-6 flex w-full items-center justify-center gap-2 border border-[#E4DFD4]
+                             py-2.5 text-sm font-medium text-[#1C1F26] transition hover:bg-[#FAF8F3]"
                 >
-                  Continue Building
-                  <ArrowRight size={16} />
+                  Continue building
+                  <ArrowRight size={15} />
                 </button>
               </div>
             ))}
@@ -216,39 +201,37 @@ export default function ResumePage() {
       {/* Modal */}
       {showModal && (
         <div
-          className="fixed inset-0 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center px-4 z-50"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#1C1F26]/50 px-4 backdrop-blur-sm"
           onClick={() => !creating && setShowModal(false)}
         >
           <div
-            className="w-full max-w-lg rounded-3xl border border-white/10 bg-slate-900/90 backdrop-blur-xl p-6 sm:p-8 shadow-2xl"
+            className="w-full max-w-lg border border-[#E4DFD4] bg-white p-6 sm:p-8"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between mb-2">
+            <div className="mb-2 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 ring-1 ring-white/20">
-                  <Sparkles size={17} className="text-violet-300" />
-                </div>
-                <h2 className="text-xl sm:text-2xl font-bold text-white">
-                  Create Resume
+                <Sparkles size={17} className="text-[#8B3A3A]" />
+                <h2 className="font-serif text-xl text-[#1C1F26] sm:text-2xl">
+                  Create resume
                 </h2>
               </div>
 
               <button
                 onClick={() => !creating && setShowModal(false)}
-                className="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition"
+                className="p-1.5 text-[#9CA3AF] transition hover:text-[#1C1F26]"
               >
-                <X size={20} />
+                <X size={19} />
               </button>
             </div>
 
-            <p className="text-slate-400 text-sm mb-6">
+            <p className="mb-6 text-sm text-[#6B7280]">
               Give your resume a title and target role to get started.
             </p>
 
             <div className="space-y-4">
               <div>
-                <label className="block mb-1.5 text-sm font-medium text-slate-300">
-                  Resume Title
+                <label className="mb-1.5 block text-sm font-medium text-[#1C1F26]">
+                  Resume title
                 </label>
                 <input
                   placeholder="e.g. Frontend Developer Resume"
@@ -256,13 +239,15 @@ export default function ResumePage() {
                   onChange={(e) =>
                     setFormData({ ...formData, title: e.target.value })
                   }
-                  className="w-full rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-500 p-3 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none transition"
+                  className="w-full border border-[#E4DFD4] bg-white p-3 text-sm
+                             text-[#1C1F26] placeholder:text-[#B8B2A2]
+                             focus:border-[#8B3A3A] focus:outline-none focus:ring-1 focus:ring-[#8B3A3A]"
                 />
               </div>
 
               <div>
-                <label className="block mb-1.5 text-sm font-medium text-slate-300">
-                  Job Title
+                <label className="mb-1.5 block text-sm font-medium text-[#1C1F26]">
+                  Job title
                 </label>
                 <input
                   placeholder="e.g. React Developer"
@@ -270,23 +255,23 @@ export default function ResumePage() {
                   onChange={(e) =>
                     setFormData({ ...formData, jobTitle: e.target.value })
                   }
-                  className="w-full rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-500 p-3 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none transition"
+                  className="w-full border border-[#E4DFD4] bg-white p-3 text-sm
+                             text-[#1C1F26] placeholder:text-[#B8B2A2]
+                             focus:border-[#8B3A3A] focus:outline-none focus:ring-1 focus:ring-[#8B3A3A]"
                 />
               </div>
 
               <div>
-                <label className="block mb-1.5 text-sm font-medium text-slate-300">
-                  Experience Level
+                <label className="mb-1.5 block text-sm font-medium text-[#1C1F26]">
+                  Experience level
                 </label>
                 <select
                   value={formData.experienceLevel}
                   onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      experienceLevel: e.target.value,
-                    })
+                    setFormData({ ...formData, experienceLevel: e.target.value })
                   }
-                  className="w-full rounded-xl bg-white/5 border border-white/10 text-white p-3 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none transition [&>option]:bg-slate-900"
+                  className="w-full border border-[#E4DFD4] bg-white p-3 text-sm
+                             text-[#1C1F26] focus:border-[#8B3A3A] focus:outline-none focus:ring-1 focus:ring-[#8B3A3A]"
                 >
                   {experienceLevels.map((level) => (
                     <option key={level} value={level}>
@@ -297,11 +282,12 @@ export default function ResumePage() {
               </div>
             </div>
 
-            <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 mt-8">
+            <div className="mt-8 flex flex-col-reverse justify-end gap-3 sm:flex-row">
               <button
                 onClick={() => setShowModal(false)}
                 disabled={creating}
-                className="px-5 py-3 border border-white/10 text-slate-300 rounded-xl font-medium hover:bg-white/5 transition disabled:opacity-50"
+                className="border border-[#E4DFD4] px-5 py-2.5 text-sm font-medium
+                           text-[#1C1F26] transition hover:bg-[#FAF8F3] disabled:opacity-50"
               >
                 Cancel
               </button>
@@ -309,9 +295,10 @@ export default function ResumePage() {
               <button
                 onClick={handleCreateResume}
                 disabled={creating || !formData.title.trim() || !formData.jobTitle.trim()}
-                className="px-5 py-3 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white rounded-xl font-semibold shadow-lg shadow-violet-900/30 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-[#1C1F26] px-5 py-2.5 text-sm font-medium text-[#FAF8F3]
+                           transition hover:bg-[#8B3A3A] disabled:cursor-not-allowed disabled:opacity-50"
               >
-                {creating ? "Creating..." : "Create Resume"}
+                {creating ? "Creating..." : "Create resume"}
               </button>
             </div>
           </div>

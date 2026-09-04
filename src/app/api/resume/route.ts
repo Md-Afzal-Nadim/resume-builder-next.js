@@ -4,44 +4,37 @@ import { getCurrentUser } from "@/lib/getCurrentUser";
 import ResumeModel from "@/models/Resume.model";
 import { ApiResponse } from "@/types/api.types";
 
+
 // =====================
-// CREATE RESUME
+// GET USER RESUMES
 // =====================
-export async function POST(req: NextRequest) {
+export async function GET(req: NextRequest) {
   try {
     await connectDB();
 
     const userId = await getCurrentUser();
 
-    const newResume = await ResumeModel.create({
+    const resumes = await ResumeModel.find({
       user_id: userId,
-      title: "",
-      summary: "",
-      personalDetails: {},
-      workExperience: [],
-      projects: [],
-      skills: [],
-      education: [],
-      certificates: [],
-    });
+    }).sort({ createdAt: -1 });
 
     return NextResponse.json<ApiResponse>(
       {
         success: true,
-        message: "Resume created successfully",
-        data: newResume,
+        message: "Resumes fetched successfully",
+        data: resumes,
       },
       {
-        status: 201,
+        status: 200,
       }
     );
   } catch (error) {
-    console.error("Error creating resume:", error);
+    console.error("Error fetching resumes:", error);
 
     return NextResponse.json<ApiResponse>(
       {
         success: false,
-        message: "Error creating resume",
+        message: "Error fetching resumes",
       },
       {
         status: 500,
@@ -49,4 +42,3 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-

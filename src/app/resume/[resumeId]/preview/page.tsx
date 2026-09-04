@@ -11,12 +11,13 @@ interface Resume {
   title: string;
   summary: string;
 
-  personalInfo: {
+  personalDetails: {
     fullname: string;
     email: string;
     mobile: string;
     location: string;
     github: string;
+    linkedIn: string;
     portfolio: string;
   };
 
@@ -32,7 +33,7 @@ interface Resume {
   projects: {
     title: string;
     description: string;
-    techStack: string[];
+    technologies: string[];
     githubUrl: string;
     liveUrl: string;
   }[];
@@ -65,8 +66,6 @@ export default function ResumePreviewPage() {
   const fetchResume = async () => {
     try {
       const { data } = await axios.get(`/api/resume/${resumeId}`);
-
-      console.log("main resume in data", data);
 
       setResume(data.data);
     } catch (error) {
@@ -116,21 +115,23 @@ export default function ResumePreviewPage() {
 
               <div className="border-b pb-6">
                 <h1 className="text-4xl font-bold">
-                  {resume.personalInfo?.fullname}
+                  {resume.personalDetails?.fullname}
                 </h1>
 
                 <div className="mt-3 text-gray-600 text-sm flex flex-wrap gap-4">
-                  <span>{resume.personalInfo?.email}</span>
+                  <span>{resume.personalDetails?.email}</span>
 
-                  <span>{resume.personalInfo?.mobile}</span>
+                  <span>{resume.personalDetails?.mobile}</span>
 
-                  <span>{resume.personalInfo?.location}</span>
+                  <span>{resume.personalDetails?.location}</span>
                 </div>
 
                 <div className="mt-2 flex gap-4 text-sm">
-                  <span>{resume.personalInfo?.github}</span>
+                  <span>{resume.personalDetails?.github}</span>
 
-                  <span>{resume.personalInfo?.portfolio}</span>
+                  <span>{resume.personalDetails?.linkedIn}</span>
+
+                  <span>{resume.personalDetails?.portfolio}</span>
                 </div>
               </div>
 
@@ -197,7 +198,7 @@ export default function ResumePreviewPage() {
                     <p className="mt-2 text-gray-700">{project.description}</p>
 
                     <div className="flex flex-wrap gap-2 mt-3">
-                      {project.techStack?.map((tech) => (
+                      {project.technologies?.map((tech) => (
                         <span
                           key={tech}
                           className="bg-violet-100 text-violet-700 px-2 py-1 rounded"
@@ -205,6 +206,19 @@ export default function ResumePreviewPage() {
                           {tech}
                         </span>
                       ))}
+                    </div>
+
+                    <div className="mt-3 flex flex-wrap gap-4 text-sm text-blue-700">
+                      {project.githubUrl && (
+                        <a href={project.githubUrl} target="_blank" rel="noreferrer">
+                          GitHub: {project.githubUrl}
+                        </a>
+                      )}
+                      {project.liveUrl && (
+                        <a href={project.liveUrl} target="_blank" rel="noreferrer">
+                          Live: {project.liveUrl}
+                        </a>
+                      )}
                     </div>
                   </div>
                 ))}

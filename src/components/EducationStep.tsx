@@ -2,11 +2,7 @@
 
 import axios from "axios";
 import { useEffect } from "react";
-import {
-  useForm,
-  useFieldArray,
-} from "react-hook-form";
-
+import { useForm, useFieldArray } from "react-hook-form";
 import {
   GraduationCap,
   Plus,
@@ -30,11 +26,7 @@ interface EducationForm {
   }[];
 }
 
-export default function EducationStep({
-  resumeId,
-  onNext,
-  onBack,
-}: Props) {
+export default function EducationStep({ resumeId, onNext, onBack }: Props) {
   const {
     control,
     register,
@@ -43,22 +35,11 @@ export default function EducationStep({
     formState: { isSubmitting },
   } = useForm<EducationForm>({
     defaultValues: {
-      education: [
-        {
-          institute: "",
-          degree: "",
-          startDate: "",
-          endDate: "",
-        },
-      ],
+      education: [{ institute: "", degree: "", startDate: "", endDate: "" }],
     },
   });
 
-  const {
-    fields,
-    append,
-    remove,
-  } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "education",
   });
@@ -69,36 +50,20 @@ export default function EducationStep({
 
   const fetchResume = async () => {
     try {
-      const { data } = await axios.get(
-        `/api/resume/${resumeId}`
-      );
-
-      if (
-        data.resume?.education &&
-        data.resume.education.length > 0
-      ) {
-        reset({
-          education:
-            data.resume.education,
-        });
+      const { data } = await axios.get(`/api/resume/${resumeId}`);
+      if (data.resume?.education && data.resume.education.length > 0) {
+        reset({ education: data.resume.education });
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const onSubmit = async (
-    values: EducationForm
-  ) => {
+  const onSubmit = async (values: EducationForm) => {
     try {
-      await axios.patch(
-        `/api/resume/${resumeId}`,
-        {
-          education:
-            values.education,
-        }
-      );
-
+      await axios.patch(`/api/resume/${resumeId}`, {
+        education: values.education,
+      });
       onNext();
     } catch (error) {
       console.log(error);
@@ -106,199 +71,146 @@ export default function EducationStep({
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-10 px-4">
-      <div className="max-w-5xl mx-auto">
-
+    <div className="min-h-screen bg-[#FAF8F3] px-4 py-10">
+      <div className="mx-auto max-w-3xl">
         {/* Progress */}
-
         <div className="mb-8">
-          <div className="flex justify-between mb-2">
-            <span className="font-medium">
-              Step 2 of 8
-            </span>
-
-            <span className="text-slate-500">
-              25%
-            </span>
+          <div className="mb-2 flex items-baseline justify-between">
+            <span className="font-serif text-sm text-[#1C1F26]">Step 2 of 8</span>
+            <span className="text-xs text-[#B8B2A2]">25% complete</span>
           </div>
-
-          <div className="h-2 bg-slate-200 rounded-full">
-            <div className="h-full w-[25%] bg-violet-600 rounded-full" />
+          <div className="h-[3px] bg-[#E4DFD4]">
+            <div className="h-full w-[25%] bg-[#8B3A3A]" />
           </div>
         </div>
 
         {/* Card */}
-
-        <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8">
-
-          <div className="flex items-center gap-4 mb-8">
-            <div className="h-12 w-12 rounded-xl bg-violet-100 flex items-center justify-center">
-              <GraduationCap className="text-violet-600" />
+        <div className="border border-[#E4DFD4] bg-white p-10">
+          <div className="mb-8 flex items-center gap-4 border-b border-[#E4DFD4] pb-6">
+            <div className="flex h-11 w-11 items-center justify-center border border-[#E4DFD4] text-[#8B3A3A]">
+              <GraduationCap size={20} strokeWidth={1.5} />
             </div>
-
             <div>
-              <h1 className="text-3xl font-bold text-slate-800">
-                Education
-              </h1>
-
-              <p className="text-slate-500">
+              <h1 className="font-serif text-2xl text-[#1C1F26]">Education</h1>
+              <p className="mt-0.5 text-sm text-[#6B7280]">
                 Add your educational background.
               </p>
             </div>
           </div>
 
-          <form
-            onSubmit={handleSubmit(
-              onSubmit
-            )}
-            className="space-y-6"
-          >
-            {fields.map(
-              (field, index) => (
-                <div
-                  key={field.id}
-                  className="border border-slate-200 rounded-2xl p-6 relative"
-                >
-                  {fields.length >
-                    1 && (
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            {fields.map((field, index) => (
+              <div
+                key={field.id}
+                className="relative border border-[#E4DFD4] p-6"
+              >
+                <div className="mb-5 flex items-center justify-between">
+                  <span className="text-xs font-medium uppercase tracking-wide text-[#B8B2A2]">
+                    Education {index + 1}
+                  </span>
+
+                  {fields.length > 1 && (
                     <button
                       type="button"
-                      onClick={() =>
-                        remove(
-                          index
-                        )
-                      }
-                      className="absolute top-4 right-4 text-red-500 hover:text-red-600"
+                      onClick={() => remove(index)}
+                      className="text-[#9CA3AF] hover:text-[#8B3A3A]"
                     >
-                      <Trash2
-                        size={18}
-                      />
+                      <Trash2 size={16} />
                     </button>
                   )}
+                </div>
 
-                  <div className="grid md:grid-cols-2 gap-5">
+                <div className="grid gap-5 md:grid-cols-2">
+                  <div>
+                    <label className="mb-2 block text-sm font-medium text-[#1C1F26]">
+                      Institute
+                    </label>
+                    <input
+                      {...register(`education.${index}.institute`)}
+                      placeholder="Lakshmi Narain College of Technology"
+                      className="w-full border border-[#E4DFD4] bg-white p-3 text-sm
+                                 text-[#1C1F26] placeholder:text-[#B8B2A2]
+                                 focus:border-[#8B3A3A] focus:outline-none focus:ring-1 focus:ring-[#8B3A3A]"
+                    />
+                  </div>
 
-                    {/* Institute */}
+                  <div>
+                    <label className="mb-2 block text-sm font-medium text-[#1C1F26]">
+                      Degree
+                    </label>
+                    <input
+                      {...register(`education.${index}.degree`)}
+                      placeholder="B.Tech Computer Science"
+                      className="w-full border border-[#E4DFD4] bg-white p-3 text-sm
+                                 text-[#1C1F26] placeholder:text-[#B8B2A2]
+                                 focus:border-[#8B3A3A] focus:outline-none focus:ring-1 focus:ring-[#8B3A3A]"
+                    />
+                  </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Institute
-                      </label>
+                  <div>
+                    <label className="mb-2 block text-sm font-medium text-[#1C1F26]">
+                      Start date
+                    </label>
+                    <input
+                      type="date"
+                      {...register(`education.${index}.startDate`)}
+                      className="w-full border border-[#E4DFD4] bg-white p-3 text-sm
+                                 text-[#1C1F26] focus:border-[#8B3A3A] focus:outline-none focus:ring-1 focus:ring-[#8B3A3A]"
+                    />
+                  </div>
 
-                      <input
-                        {...register(
-                          `education.${index}.institute`
-                        )}
-                        placeholder="Lakshmi Narain College of Technology"
-                        className="w-full border border-slate-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-violet-500"
-                      />
-                    </div>
-
-                    {/* Degree */}
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Degree
-                      </label>
-
-                      <input
-                        {...register(
-                          `education.${index}.degree`
-                        )}
-                        placeholder="B.Tech Computer Science"
-                        className="w-full border border-slate-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-violet-500"
-                      />
-                    </div>
-
-                    {/* Start Date */}
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Start Date
-                      </label>
-
-                      <input
-                        type="date"
-                        {...register(
-                          `education.${index}.startDate`
-                        )}
-                        className="w-full border border-slate-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-violet-500"
-                      />
-                    </div>
-
-                    {/* End Date */}
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        End Date
-                      </label>
-
-                      <input
-                        type="date"
-                        {...register(
-                          `education.${index}.endDate`
-                        )}
-                        className="w-full border border-slate-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-violet-500"
-                      />
-                    </div>
-
+                  <div>
+                    <label className="mb-2 block text-sm font-medium text-[#1C1F26]">
+                      End date
+                    </label>
+                    <input
+                      type="date"
+                      {...register(`education.${index}.endDate`)}
+                      className="w-full border border-[#E4DFD4] bg-white p-3 text-sm
+                                 text-[#1C1F26] focus:border-[#8B3A3A] focus:outline-none focus:ring-1 focus:ring-[#8B3A3A]"
+                    />
                   </div>
                 </div>
-              )
-            )}
+              </div>
+            ))}
 
             {/* Add Education */}
-
             <button
               type="button"
               onClick={() =>
-                append({
-                  institute: "",
-                  degree: "",
-                  startDate: "",
-                  endDate: "",
-                })
+                append({ institute: "", degree: "", startDate: "", endDate: "" })
               }
-              className="flex items-center gap-2 border border-violet-300 text-violet-600 px-5 py-3 rounded-xl hover:bg-violet-50 transition"
+              className="flex items-center gap-2 border border-[#8B3A3A]/40 px-5 py-2.5
+                         text-sm font-medium text-[#8B3A3A] transition hover:bg-[#8B3A3A]/5"
             >
-              <Plus size={18} />
-              Add Education
+              <Plus size={16} />
+              Add education
             </button>
 
             {/* Footer */}
-
-            <div className="flex justify-between pt-6">
-
+            <div className="flex justify-between border-t border-[#E4DFD4] pt-6">
               <button
                 type="button"
                 onClick={onBack}
-                className="flex items-center gap-2 px-5 py-3 border border-slate-300 rounded-xl hover:bg-slate-100"
+                className="flex items-center gap-2 border border-[#E4DFD4] px-5 py-2.5
+                           text-sm font-medium text-[#1C1F26] transition hover:bg-[#FAF8F3]"
               >
-                <ArrowLeft
-                  size={18}
-                />
+                <ArrowLeft size={16} />
                 Back
               </button>
 
               <button
                 type="submit"
-                disabled={
-                  isSubmitting
-                }
-                className="flex items-center gap-2 px-6 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-xl"
+                disabled={isSubmitting}
+                className="flex items-center gap-2 bg-[#1C1F26] px-6 py-2.5
+                           text-sm font-medium text-[#FAF8F3] transition
+                           hover:bg-[#8B3A3A] disabled:opacity-60"
               >
-                {isSubmitting
-                  ? "Saving..."
-                  : "Continue"}
-
-                <ArrowRight
-                  size={18}
-                />
+                {isSubmitting ? "Saving..." : "Continue"}
+                <ArrowRight size={16} />
               </button>
-
             </div>
           </form>
-
         </div>
       </div>
     </div>
