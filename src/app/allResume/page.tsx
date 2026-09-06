@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getAllResumesApi } from "@/apis/resume.api";
+
 import {
   FileText,
   Plus,
@@ -11,6 +12,7 @@ import {
   Phone,
   MapPin,
   Globe,
+  Link,
 } from "lucide-react";
 
 interface Resume {
@@ -51,6 +53,8 @@ interface Resume {
   createdAt: string;
   updatedAt: string;
 }
+
+ const [showModal, setShowModal] = useState(false);
 
 function formatMonthYear(dateStr?: string) {
   if (!dateStr) return "";
@@ -140,6 +144,7 @@ export default function ResumePage() {
             <Plus size={16} />
             New resume
           </button>
+          
         </div>
 
         {/* Loading */}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Eye } from "lucide-react";
+import { Pencil } from "lucide-react";
 
 interface EditPdfProps {
   resumeId?: string;
@@ -10,7 +10,7 @@ interface EditPdfProps {
 
 export default function EditPdf({
   resumeId,
-  label = "Edit Resume",
+  label = "Edit resume",
 }: EditPdfProps) {
   const router = useRouter();
 
@@ -23,9 +23,12 @@ export default function EditPdf({
     <button
       type="button"
       onClick={handleEdit}
-      className="w-full flex items-center gap-3 border px-4 py-3 rounded-xl hover:bg-slate-50 transition"
+      disabled={!resumeId}
+      className="flex w-full items-center gap-3 border border-[#E4DFD4] px-4 py-3
+                 text-sm font-medium text-[#1C1F26] transition hover:bg-[#FAF8F3]
+                 disabled:cursor-not-allowed disabled:opacity-50"
     >
-      <Eye size={18} />
+      <Pencil size={16} className="text-[#8B3A3A]" />
       {label}
     </button>
   );

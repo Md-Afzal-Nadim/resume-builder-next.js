@@ -24,7 +24,7 @@ export default function Navbar() {
 
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[#E4DFD4] bg-[#FAF8F3]/90 backdrop-blur-md">
+       <header className="print:hidden sticky top-0 z-40 border-b border-[#E4DFD4] bg-[#FAF8F3]/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-6">
         <Link href="/resume" className="font-serif text-xl text-[#1C1F26]">
           Resume<span className="text-[#8B3A3A]">Builder</span>

@@ -15,9 +15,10 @@ export default function DownloadPdf({ label = "Download PDF" }: DownloadPdfProps
     <button
       type="button"
       onClick={handleDownload}
-      className="w-full flex items-center gap-3 border px-4 py-3 rounded-xl hover:bg-slate-50 transition"
+      className="flex w-full items-center gap-3 border border-[#E4DFD4] px-4 py-3
+                 text-sm font-medium text-[#1C1F26] transition hover:bg-[#FAF8F3]"
     >
-      <Download size={18} />
+      <Download size={16} className="text-[#8B3A3A]" />
       {label}
     </button>
   );
