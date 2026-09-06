@@ -54,7 +54,7 @@ interface Resume {
   updatedAt: string;
 }
 
- const [showModal, setShowModal] = useState(false);
+ 
 
 function formatMonthYear(dateStr?: string) {
   if (!dateStr) return "";
