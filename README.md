@@ -6,7 +6,7 @@ The application helps users create professional, ATS-friendly resumes, manage th
 
 ## 🚀 Live Demo
 
-🔗 **Live Website:** YOUR_LIVE_URL
+🔗 **Live Website:** https://resume-builder-next-js-five.vercel.app/
 
 ## 🎥 Project Demo
 
@@ -29,7 +29,6 @@ https://github.com/user-attachments/assets/bdd3bd52-d648-4902-b0db-ea0e8dcd8d5c
 - 👀 Resume preview
 - 📄 Download resume as **PDF**
 - 💾 Save and manage resumes
-- 📱 Responsive user interface
 - ⚡ Fast and scalable Next.js application
 
 ## 🛠️ Tech Stack
