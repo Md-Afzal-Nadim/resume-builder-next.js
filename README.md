@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📄 AI Resume Builder
 
-## Getting Started
+A modern full-stack **AI-powered Resume Builder** built with **Next.js, TypeScript, MongoDB, and JWT Authentication**.
 
-First, run the development server:
+The application helps users create professional, ATS-friendly resumes, manage their resume information, preview the final resume, download it as a PDF, and check their **ATS score**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Live Demo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🔗 **Live Website:** YOUR_LIVE_URL
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🎥 Project Demo
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+https://github.com/user-attachments/assets/bdd3bd52-d648-4902-b0db-ea0e8dcd8d5c
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ✨ Features
 
-## Deploy on Vercel
+- 🔐 Secure authentication using **JWT**
+- 📝 Multi-step resume creation
+- 👤 Personal information management
+- 🎓 Education section
+- 💼 Experience section
+- 🛠️ Skills management
+- 🚀 Projects section
+- 🤖 AI-assisted resume content generation
+- 📊 **ATS Score Checker**
+- 👀 Resume preview
+- 📄 Download resume as **PDF**
+- 💾 Save and manage resumes
+- 📱 Responsive user interface
+- ⚡ Fast and scalable Next.js application
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛠️ Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Frontend
+- Next.js
+- React.js
+- TypeScript
+- Tailwind CSS
+
+### Backend
+- Next.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+
+### Other
+- PDF Generation
+- ATS Resume Analysis
+- AI Integration
+
+## 🔐 Authentication
+
+The application uses **JWT-based authentication** to securely authenticate users and protect user-specific resume data.
+
+Users can:
+
+- Register an account
+- Login securely
+- Access their resumes
+- Manage their profile
+- Create and update resumes
+
+## 📄 Resume Builder
+
+The resume builder provides a structured multi-step workflow for creating a professional resume.
+
+Users can add:
+
+- Personal Details
+- Education
+- Work Experience
+- Skills
+- Projects
+- Additional Information
+
+The resume can be previewed before downloading.
+
+## 🤖 ATS Score Checker
+
+The application includes an **ATS Score Checker** that analyzes the resume and provides an ATS score.
+
+This helps users identify potential issues and improve their resume for Applicant Tracking Systems (ATS).
+
+## 📥 PDF Resume
+
+After completing the resume, users can preview and download their resume as a **PDF**, making it ready for job applications.
+
+## 🖥️ Application Workflow
+
+```text
+Landing Page
+     ↓
+Authentication
+     ↓
+Dashboard
+     ↓
+Create Resume
+     ↓
+Personal Information
+     ↓
+Education
+     ↓
+Experience
+     ↓
+Skills
+     ↓
+Projects
+     ↓
+Resume Preview
+     ↓
+ATS Score Analysis
+     ↓
+Download PDF
